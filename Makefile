@@ -63,13 +63,7 @@ INC_DIR := include
 OBJ_DIR := build
 BIN_DIR := bin
 
-EXEC := $(BIN_DIR)/cMaponiA3_test_3x3_3 \
-		$(BIN_DIR)/test_h5 \
-		$(BIN_DIR)/fnu_test_h5 \
-		$(BIN_DIR)/qmckl_test_c \
-		$(BIN_DIR)/fMaponiA3_test_3x3_3 \
-		$(BIN_DIR)/fMaponiA3_test_4x4_2 \
-		$(BIN_DIR)/QMCChem_dataset_test
+EXEC := $(BIN_DIR)/test_h5 
 
 ## Build tagets
 .PHONY: all clean distclean
@@ -101,8 +95,8 @@ $(OBJ_DIR)/%_h5.o: $(TST_DIR)/%_h5.cpp $(INC_DIR)/* | $(OBJ_DIR)
 	$(H5CXX) $(H5CXXFLAGS) $(INCLUDE) -c -o $@ $<
 
 ## HDF5/C++ objects
-$(OBJ_DIR)/qmckl_test_c.o: $(TST_DIR)/qmckl_test_c.cpp $(INC_DIR)/* | $(OBJ_DIR)
-	$(H5CXX) $(H5CXXFLAGS) $(INCLUDE) $(QMCKL_INCLUDE) -c -o $@ $<
+#$(OBJ_DIR)/qmckl_test_c.o: $(TST_DIR)/qmckl_test_c.cpp $(INC_DIR)/* | $(OBJ_DIR)
+#	$(H5CXX) $(H5CXXFLAGS) $(INCLUDE) $(QMCKL_INCLUDE) -c -o $@ $<
 
 
 ## Fortran modules
@@ -119,23 +113,23 @@ $(OBJ_DIR)/%.o: $(TST_DIR)/%.f90 | $(OBJ_DIR)
 
 
 #### LINKING
-$(BIN_DIR)/cMaponiA3_test_3x3_3: $(OBJ_DIR)/cMaponiA3_test_3x3_3.o $(DEPS_CXX) | $(BIN_DIR)
-	$(CXX) $(LFLAGS) -o $@ $^
+#$(BIN_DIR)/cMaponiA3_test_3x3_3: $(OBJ_DIR)/cMaponiA3_test_3x3_3.o $(DEPS_CXX) | $(BIN_DIR)
+#	$(CXX) $(LFLAGS) -o $@ $^
 
 $(BIN_DIR)/test_h5: $(OBJ_DIR)/test_h5.o $(DEPS_CXX) | $(BIN_DIR)
 	$(H5CXX) $(H5LFLAGS) -o $@ $^
 
-$(BIN_DIR)/fnu_test_h5: $(OBJ_DIR)/fnu_test_h5.o $(DEPS_CXX) | $(BIN_DIR)
-	$(H5CXX) $(H5LFLAGS) -o $@ $^
+#$(BIN_DIR)/fnu_test_h5: $(OBJ_DIR)/fnu_test_h5.o $(DEPS_CXX) | $(BIN_DIR)
+#	$(H5CXX) $(H5LFLAGS) -o $@ $^
 
-$(BIN_DIR)/qmckl_test_c: $(OBJ_DIR)/qmckl_test_c.o | $(BIN_DIR)
-	$(H5CXX) $(H5LFLAGS) $(QMCKLLFLAGS) -o $@ $^
+#$(BIN_DIR)/qmckl_test_c: $(OBJ_DIR)/qmckl_test_c.o | $(BIN_DIR)
+#	$(H5CXX) $(H5LFLAGS) $(QMCKLLFLAGS) -o $@ $^
 
-$(BIN_DIR)/fMaponiA3_test_3x3_3: $(DEPS_F) $(OBJ_DIR)/fMaponiA3_test_3x3_3.o  | $(BIN_DIR)
-	$(FC) $(LFLAGS) $(FLIBS) -o $@ $^
+#$(BIN_DIR)/fMaponiA3_test_3x3_3: $(DEPS_F) $(OBJ_DIR)/fMaponiA3_test_3x3_3.o  | $(BIN_DIR)
+#	$(FC) $(LFLAGS) $(FLIBS) -o $@ $^
 
-$(BIN_DIR)/fMaponiA3_test_4x4_2: $(DEPS_F) $(OBJ_DIR)/fMaponiA3_test_4x4_2.o  | $(BIN_DIR)
-	$(FC) $(LFLAGS) $(FLIBS) -o $@ $^
+#$(BIN_DIR)/fMaponiA3_test_4x4_2: $(DEPS_F) $(OBJ_DIR)/fMaponiA3_test_4x4_2.o  | $(BIN_DIR)
+#	$(FC) $(LFLAGS) $(FLIBS) -o $@ $^
 
-$(BIN_DIR)/QMCChem_dataset_test: $(DEPS_F) $(OBJ_DIR)/QMCChem_dataset_test.o  | $(BIN_DIR)
-	$(FC) $(LFLAGS) $(FLIBS) -o $@ $^
+#$(BIN_DIR)/QMCChem_dataset_test: $(DEPS_F) $(OBJ_DIR)/QMCChem_dataset_test.o  | $(BIN_DIR)
+#	$(FC) $(LFLAGS) $(FLIBS) -o $@ $^
