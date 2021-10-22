@@ -23,7 +23,10 @@ AX_LIB_HDF5()
 CXXFLAGS="${HDF5_CFLAGS} ${CXXFLAGS}"
 CPPFLAGS="${HDF5_CPPFLAGS} ${CPPFLAGS}"
 LDFLAGS="${HDF5_LDFLAGS} ${LDFLAGS}"
-LIBS="${HDF5_LIBS} ${LIBS}"
+LIBS="${HDF5_LIBS} ${LIBS} -lhdf5_cpp"
+
+# look in the local include directory
+CPPFLAGS="${CPPFLAGS} -I./include/"
 
 # the name of the output
 AC_CONFIG_FILES([Makefile])

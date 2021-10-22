@@ -6,12 +6,11 @@ LIBS = @LIBS@
 LDFLAGS = @LDFLAGS@
 
 ## Dependencies
-DEPS_CXX = $(OBJ_DIR)/SM_Maponi.o \
-		   $(OBJ_DIR)/SM_Standard.o \
-		   $(OBJ_DIR)/Woodbury.o \
-		   $(OBJ_DIR)/SMWB.o \
-		   $(OBJ_DIR)/Helpers.o
-
+DEPS_CXX = $(SRC_DIR)/SM_Maponi.o \
+	   $(SRC_DIR)/SM_Standard.o \
+	   $(SRC_DIR)/Woodbury.o \
+	   $(SRC_DIR)/SMWB.o \
+	   $(SRC_DIR)/Helpers.o
 
 ## Directory structure
 SRC_DIR := src
@@ -28,27 +27,15 @@ EXEC := $(BIN_DIR)/test_h5
 all: $(EXEC)
 
 clean:
-	@rm -vrf $(OBJ_DIR) *.dbg *.cmdx *.cmod *.ilm *.stb
-
-distclean: clean
-	@rm -vrf $(BIN_DIR) \
-	Slater* Updates.dat
-
+	@rm -vrf $(OBJ_DIR) $(SRC_DIR)/*.o $(TST_DIR)/*.o
 
 #### COMPILING
 $(BIN_DIR) $(OBJ_DIR):
 	mkdir -p $@
 
-### IMPLICIT BUILD RULES
-## C++ objects
-$(OBJ_DIR)/%.o: $(TST_DIR)/%.cpp $(wildcard $(INC_DIR)/*.hpp) | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(wildcard $(INC_DIR)/*.hpp) | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+.SUFFIXES: .cpp .o
 
 #### LINKING
-$(BIN_DIR)/test_h5: $(OBJ_DIR)/test_h5.o $(DEPS_CXX) | $(BIN_DIR)
-	$(CXX) $(LDFLAGS) $(LIBS) -o $@ $^
-
+$(BIN_DIR)/test_h5: $(DEPS_CXX) $(TST_DIR)/test_h5.o | $(BIN_DIR)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(TST_DIR)/test_h5.o $(DEPS_CXX) -o $(EXEC) $(LDFLAGS) $(LIBS)
 
