@@ -2,8 +2,11 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
+# initialize autoconf
 AC_INIT([sherman], [0.0.1], [https://github.com/q-posev/Sherman-Morrison])
+# initialize automake
 AM_INIT_AUTOMAKE([foreign subdir-objects silent-rules -Wall 1.11])
+# initialize libtool
 LT_INIT
 
 # set srcdir variable to the location of the file below 
@@ -27,9 +30,6 @@ CXXFLAGS="${HDF5_CFLAGS} ${CXXFLAGS}"
 CPPFLAGS="${HDF5_CPPFLAGS} ${CPPFLAGS}"
 LDFLAGS="${HDF5_LDFLAGS} ${LDFLAGS}"
 LIBS="${HDF5_LIBS} ${LIBS} -lhdf5_cpp"
-
-# look in the local include directory
-CPPFLAGS="${CPPFLAGS} -I./include/"
 
 # the name of the output
 AC_CONFIG_FILES([Makefile])
