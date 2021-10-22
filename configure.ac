@@ -3,11 +3,14 @@
 
 AC_PREREQ([2.69])
 AC_INIT([sherman], [0.0.1], [https://github.com/q-posev/Sherman-Morrison])
+AM_INIT_AUTOMAKE([foreign subdir-objects silent-rules -Wall 1.11])
+LT_INIT
 
 # set srcdir variable to the location of the file below 
 AC_CONFIG_SRCDIR([Makefile.in])
 # produce header config with all defined variables like HAS_SMTH 
 AC_CONFIG_HEADERS([include/config.h])
+AC_CONFIG_MACRO_DIR([m4])
 
 # ================ C++ compiler characteristics ================ #
 AC_LANG(C++)
