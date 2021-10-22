@@ -4,6 +4,11 @@
 AC_PREREQ([2.69])
 AC_INIT([sherman], [0.0.1], [https://github.com/q-posev/Sherman-Morrison])
 
+# set srcdir variable to the location of the file below 
+AC_CONFIG_SRCDIR([Makefile.in])
+# produce header config with all defined variables like HAS_SMTH 
+AC_CONFIG_HEADERS([include/config.h])
+
 # ================ C++ compiler characteristics ================ #
 AC_LANG(C++)
 # search for the C++ compiler
@@ -11,17 +16,17 @@ AC_PROG_CXX
 # check if the C++ compiler accepts -c and -o simultaneously
 AC_PROG_CXX_C_O
 
+# call the m4 macro to locate HDF5
+AX_LIB_HDF5()
 
-# ================ Fortran compiler characteristics ================ #
-# search for the Fortran compiler
-AC_PROG_FC
-# modify FCFLAGS_f90 variable if needed for Fortran compiler to accept f90 files
-AC_FC_SRCEXT([f90])
-# modify FCFLAGS variable if needed to allow free-format source code
-AC_FC_FREEFORM
-# check if the Fortran compiler accepts -c and -o simultaneously
-AC_PROG_FC_C_O
+# pre-append compiler and linking flags with the one of HDF5
+CXXFLAGS="${HDF5_CFLAGS} ${CXXFLAGS}"
+CPPFLAGS="${HDF5_CPPFLAGS} ${CPPFLAGS}"
+LDFLAGS="${HDF5_LDFLAGS} ${LDFLAGS}"
+LIBS="${HDF5_LIBS} ${LIBS}"
 
+# the name of the output
+AC_CONFIG_FILES([Makefile])
 
 AC_OUTPUT
 
@@ -34,8 +39,12 @@ Prefix ........:  ${prefix}
 CXX ...........:  ${CXX}
 CPPFLAGS ......:  ${CPPFLAGS}
 CXXFLAGS ......:  ${CXXFLAGS}
-FC ............:  ${FC}
-FCLAGS ........:  ${FCFLAGS}
+LDFLAGS .......:  ${LDFLAGS}
+LIBS ..........:  ${LIBS}
+
+Package features:
+  Compilation with HDF5 ..:  ${with_hdf5}
+  HDF5 version ...........:  ${HDF5_VERSION}
 
 --------------------------------------------------"
 
