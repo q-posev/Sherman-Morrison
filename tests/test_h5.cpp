@@ -1,5 +1,5 @@
-#include "hdf5/serial/H5Cpp.h"
-#include "hdf5/serial/hdf5.h"
+#include "H5Cpp.h"
+#include "hdf5.h"
 
 #include "Helpers.hpp"
 #include "SMWB.hpp"

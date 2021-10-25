@@ -21,6 +21,8 @@ AC_LANG(C++)
 AC_PROG_CXX
 # check if the C++ compiler accepts -c and -o simultaneously
 AC_PROG_CXX_C_O
+# add compiler flag to specify C++ standard used
+CXXFLAGS="${CXXFLAGS} -std=c++11"
 
 # call the m4 macro to locate HDF5
 AX_LIB_HDF5()
