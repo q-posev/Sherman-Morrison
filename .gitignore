@@ -9,7 +9,6 @@
 Slater*
 Updates*
 datasets/dataset.*
-bin/
 *.vfcrun.hd5
 *.vfcraw.hd5
 __pycache__
