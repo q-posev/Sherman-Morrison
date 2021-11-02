@@ -20,7 +20,6 @@ autom4te.cache/
 config.log
 config.status
 configure
-Makefile
 aclocal.m4
 include/config.h.in
 COPYING
@@ -45,4 +44,3 @@ src/.dirstamp
 test_h5
 tests/.deps/
 tests/.dirstamp
-Makefile.in
