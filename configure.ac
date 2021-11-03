@@ -4,6 +4,9 @@
 # Initialize autoconf
 AC_INIT([sherman-morrison], [0.0.1], [])
 
+# Initialize automake (foreign needed to ignore missing NEW, AUTHORS etc.) 
+AM_INIT_AUTOMAKE([foreign subdir-objects silent-rules -Wall 1.11])
+
 # do the tests with C++ flags
 AC_LANG(C++)
 # search for the C++ compiler
