@@ -1,10 +1,11 @@
 
 ## Specify the C++ compiler as well as preprocessor, compiler and linking flags
-CXX      = g++
-CXXFLAGS = -g -O2 -std=c++11
-CPPFLAGS = -I/usr/include -I/usr/include/hdf5/serial  -I./include/
-LIBS     = -lhdf5_hl -lhdf5  -lpthread -lsz -lz -ldl -lm  -lhdf5_cpp
-LDFLAGS  = -L/usr/lib/x86_64-linux-gnu/hdf5/serial 
+CXX       = @CXX@
+CXXFLAGS  = @CXXFLAGS@
+CPPFLAGS  = @CPPFLAGS@
+LIBS      = @LIBS@
+LDFLAGS   = @LDFLAGS@
+
 
 ## Directory structure
 SRC_DIR := src
