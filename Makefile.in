@@ -1,0 +1,41 @@
+
+## Specify the C++ compiler as well as preprocessor, compiler and linking flags
+CXX       = @CXX@
+CXXFLAGS  = @CXXFLAGS@
+CPPFLAGS += -I./include/
+LIBS     += -lhdf5 -lhdf5_cpp -lz
+LDFLAGS  += -L/home/user/.conda/envs/autotools/lib
+
+## Directory structure
+SRC_DIR := src
+TST_DIR := tests
+INC_DIR := include
+BIN_DIR := bin
+
+EXEC := $(BIN_DIR)/test_h5 
+
+## Dependencies
+DEPS_CXX = $(SRC_DIR)/SM_Maponi.o \
+	   $(SRC_DIR)/SM_Standard.o \
+	   $(SRC_DIR)/Woodbury.o \
+	   $(SRC_DIR)/SMWB.o \
+	   $(SRC_DIR)/Helpers.o
+
+
+## Build tagets
+.PHONY: all clean
+
+all: $(EXEC)
+
+clean:
+	@rm -rf -- $(SRC_DIR)/*.o $(TST_DIR)/*.o $(EXEC)
+
+
+## Compiling dependencies
+.SUFFIXES: .cpp .o
+
+
+## Linking
+$(BIN_DIR)/test_h5: $(DEPS_CXX) $(TST_DIR)/test_h5.o
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(TST_DIR)/test_h5.o $(DEPS_CXX) -o $(EXEC) $(LDFLAGS) $(LIBS)
+
